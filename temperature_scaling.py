@@ -14,6 +14,8 @@ class ModelWithTemperature(nn.Module):
     def __init__(self, model):
         super(ModelWithTemperature, self).__init__()
         self.model = model
+        # notify all your layers that you are in eval mode, that way, batchnorm or dropout layers will work in eval mode instead of training mode. 
+        self.model.eval() 
         self.temperature = nn.Parameter(torch.ones(1) * 1.5)
 
     def forward(self, input):
